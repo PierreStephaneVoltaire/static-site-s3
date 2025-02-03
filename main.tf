@@ -1,6 +1,6 @@
 provider "aws" {
+  alias  = "us-east-1"
   region = "us-east-1"
-
 }
 
 data "aws_route53_zone" "main" {
@@ -12,7 +12,7 @@ module "website" {
   source             = "SPHTech-Platform/s3-cloudfront-static-site/aws"
   version            = "0.3.3"
   additional_aliases = [var.domain_name, "www.${var.domain_name}"]
-  providers          = { aws.us-east-1 = aws }
+  providers          = { aws.us-east-1 = aws.us-east-1 }
   bucket_name        = var.domain_name
   price_class        = "PriceClass_100"
   domains = {
